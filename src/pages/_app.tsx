@@ -1,11 +1,12 @@
 import '@/styles/globals.css'
-
-import { ChakraProvider } from '@chakra-ui/react'
+import { theme } from '@/styles/theme'
 
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 
 import NextNProgress from 'nextjs-progressbar'
+
+import { ChakraProvider } from '@chakra-ui/react'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -17,7 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <Component {...pageProps} />
       </ChakraProvider>
     </>

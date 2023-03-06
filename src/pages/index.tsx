@@ -1,9 +1,12 @@
+import { Heading, Text } from '@chakra-ui/react'
+
 export default function Home() {
   return (
     <>
-      <main>
-        <h1>Hello World</h1>
-      </main>
+      <Heading letterSpacing={'tighter'}>
+        Hello Worl sadsadsadsa dsadas dasd as dasd d
+      </Heading>
+      <Text letterSpacing={'tighter'}>asdasd</Text>
     </>
   )
 }

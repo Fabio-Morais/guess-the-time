@@ -1,9 +1,9 @@
-import InputGuesser from '@/components/InputGuesser'
+import { Container, Heading, VStack } from '@chakra-ui/react'
+
+import InputGuesserGroup from '@/components/InputGuesser/InputGuesserGroup'
 import RoundBadge from '@/components/RoundBadge'
 import Timer from '@/components/Timer'
 import Map from '@/components/map'
-
-import { Button, Container, Heading, VStack } from '@chakra-ui/react'
 
 const Index = () => {
   return (
@@ -19,12 +19,9 @@ const Index = () => {
 
         <VStack spacing={5} width="100%">
           <RoundBadge maxRounds={5}></RoundBadge>
-          <Timer></Timer>
-          <Map></Map>
-          <InputGuesser time="minutes" max={60}></InputGuesser>
-          <Button colorScheme="teal" size="lg">
-            Button
-          </Button>
+          <Timer />
+          <Map />
+          <InputGuesserGroup />
         </VStack>
       </Container>
     </>

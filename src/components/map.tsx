@@ -11,6 +11,7 @@ const Map = () => {
       boxShadow="2xl"
       rounded="md"
       p={3}
+      zIndex={1}
     >
       <iframe
         height="100%"

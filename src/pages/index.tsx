@@ -1,12 +1,12 @@
-import { Heading, Text } from '@chakra-ui/react'
+import { Button, Heading, Link } from '@chakra-ui/react'
 
 export default function Home() {
   return (
     <>
-      <Heading letterSpacing={'tighter'}>
-        Hello Worl sadsadsadsa dsadas dasd as dasd d
-      </Heading>
-      <Text letterSpacing={'tighter'}>asdasd</Text>
+      <Heading letterSpacing={'tighter'}>Hello World</Heading>
+      <Button>
+        <Link href="/singleplayer">game</Link>
+      </Button>
     </>
   )
 }

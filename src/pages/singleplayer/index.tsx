@@ -1,9 +1,12 @@
+import dynamic from 'next/dynamic'
+
 import { Container, Heading, VStack } from '@chakra-ui/react'
 
 import InputGuesserGroup from '@/components/InputGuesser/InputGuesserGroup'
 import RoundBadge from '@/components/RoundBadge'
 import Timer from '@/components/Timer'
-import Map from '@/components/map'
+
+const Map = dynamic(() => import('@/components/Map/Map'), { ssr: false })
 
 const Index = () => {
   return (

@@ -1,20 +1,23 @@
 import L from 'leaflet'
 
 import airplaneIcon from '../../public/favicon.ico'
-import airplaneIcon3 from '../../public/next.svg'
-import airplaneIcon2 from '../../public/vercel.svg'
+import destination from '../../public/map/flag.png'
+import origin from '../../public/map/placeholder.png'
+
+import { MapIcons } from '@/utils/enums/MapIcons'
+import { MobilityType } from '@/utils/enums/MobilityType'
 
 export const getIcon = (type: string) => {
   switch (type) {
-    case 'car':
+    case MobilityType.car:
       return iconCar
-    case 'bike':
+    case MobilityType.bike:
       return iconBike
-    case 'human':
+    case MobilityType.human:
       return iconHuman
-    case 'origin':
+    case MapIcons.origin:
       return iconOrigin
-    case 'dest':
+    case MapIcons.destination:
       return iconDest
     default:
       return iconOrigin
@@ -23,26 +26,26 @@ export const getIcon = (type: string) => {
 
 const iconCar = L.icon({
   iconSize: [45, 45],
-  popupAnchor: [2, -20],
+  iconAnchor: [20, 30],
   iconUrl: airplaneIcon.src,
 })
 const iconBike = L.icon({
   iconSize: [45, 45],
-  popupAnchor: [2, -20],
+  iconAnchor: [2, -20],
   iconUrl: airplaneIcon.src,
 })
 const iconHuman = L.icon({
   iconSize: [45, 45],
-  popupAnchor: [2, -20],
+  iconAnchor: [2, -20],
   iconUrl: airplaneIcon.src,
 })
 const iconOrigin = L.icon({
   iconSize: [45, 45],
-  popupAnchor: [2, -20],
-  iconUrl: airplaneIcon2.src,
+  iconAnchor: [25, 40],
+  iconUrl: origin.src,
 })
 const iconDest = L.icon({
   iconSize: [45, 45],
-  popupAnchor: [2, -20],
-  iconUrl: airplaneIcon3.src,
+  iconAnchor: [10, 45],
+  iconUrl: destination.src,
 })

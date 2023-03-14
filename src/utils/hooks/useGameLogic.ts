@@ -1,6 +1,6 @@
-import { useState } from 'react'
-
 import Timer from '@/utils/interfaces/Timer'
+
+import { useState } from 'react'
 
 const useGameLogic = () => {
   const initialState: Timer = { days: 0, hours: 0, minutes: 0 }
@@ -11,7 +11,9 @@ const useGameLogic = () => {
   const setMinutes = (minutes: number) =>
     setTimer({ ...timer, minutes: minutes })
 
-  const printTimer = () => {}
+  const printTimer = () => {
+    /*TODO: add logic to print the timer*/
+  }
 
   return [timer, setDay, setHours, setMinutes, printTimer] as const
 }

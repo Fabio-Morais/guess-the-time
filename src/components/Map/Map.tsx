@@ -9,6 +9,7 @@ import 'leaflet/dist/leaflet.css'
 import { FeatureGroup, MapContainer, Polyline, TileLayer } from 'react-leaflet'
 
 /* TODO: To be removed*/
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const outerBounds: any = [
   [39.466667, -0.375],
   [41.07265370061424, -8.401270685940867],

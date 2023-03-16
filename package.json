@@ -13,6 +13,7 @@
     "@chakra-ui/react": "^2.5.1",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@googlemaps/polyline-codec": "^1.0.28",
     "@next/font": "13.2.3",
     "@types/node": "18.14.6",
     "@types/react": "18.0.28",

@@ -21,7 +21,7 @@ const Index = () => {
         </Heading>
 
         <VStack spacing={5} width="100%">
-          <RoundBadge maxRounds={5}/>
+          <RoundBadge maxRounds={5} />
           <Timer />
           <Map />
           <InputGuesserGroup />

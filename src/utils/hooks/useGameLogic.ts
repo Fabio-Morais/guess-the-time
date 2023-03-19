@@ -3,7 +3,7 @@ import Timer from '@/utils/interfaces/Timer'
 import { useState } from 'react'
 
 const useGameLogic = () => {
-  const initialState: Timer = { days: 0, hours: 0, minutes: 0 }
+  const initialState: Timer = { days: 0, hours: 0, minutes: 0, seconds: 0 }
   const [timer, setTimer] = useState<Timer>(initialState)
 
   const setDay = (day: number) => setTimer({ ...timer, days: day })

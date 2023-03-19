@@ -5,9 +5,31 @@ import { routeData } from '../../../fakeData/routeData'
 
 import { Routes } from '@/utils/interfaces/Routes'
 
-export default function handler(
+export interface ResponseType {
+  placesData: number[][] // [lat, lng]
+  routesData: Routes
+}
+
+export async function getRoute(): Promise<Routes> {
+  //TODO: call Google API
+  return routeData
+}
+
+export async function getRandomPlaces(): Promise<number[][]> {
+  //TODO: call random places API
+  return [
+    [39.466667, -0.375],
+    [41.07265370061424, -8.401270685940867],
+  ]
+}
+
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Routes>
+  res: NextApiResponse<ResponseType>
 ) {
-  res.status(200).json(routeData)
+  /* TODO: we need to encode the data to send, preventing cheating Or use redis to store temporary data
+   * */
+  const places: number[][] = await getRandomPlaces()
+  const routes: Routes = await getRoute()
+  res.status(200).json({ placesData: places, routesData: routes })
 }

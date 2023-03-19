@@ -5,33 +5,16 @@ import { MapIcons } from '@/utils/enums/MapIcons'
 import { MobilityType } from '@/utils/enums/MobilityType'
 import useMapLogic from '@/utils/hooks/useMapLogic'
 
+import { LatLngBoundsExpression, LatLngExpression } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { FeatureGroup, MapContainer, Polyline, TileLayer } from 'react-leaflet'
 
-/* TODO: To be removed*/
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const outerBounds: any = [
-  [39.466667, -0.375],
-  [41.07265370061424, -8.401270685940867],
-]
-const dataStory = [
-  {
-    lat: outerBounds[0][0],
-    lng: outerBounds[0][1],
-  },
-  {
-    lat: outerBounds[1][0],
-    lng: outerBounds[1][1],
-  },
-]
-/*********************/
-const Map = () => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Map = ({ path, places }: { path: string; places: number[][] }) => {
   const numberOfRepetitions = 1
   //TODO: To be removed
   const [currentTrack, repeatOneMoreTime] = useMapLogic(
-    outerBounds[0][0],
-    outerBounds[0][1],
-    dataStory,
+    places,
     numberOfRepetitions
   )
 
@@ -48,11 +31,16 @@ const Map = () => {
       p={3}
       zIndex={1}
     >
-      <MapContainer bounds={outerBounds} style={{ height: '100%' }}>
+      <MapContainer
+        bounds={places as LatLngBoundsExpression}
+        style={{ height: '100%' }}
+      >
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+
+        {/* Vehicle marker */}
         <Marker
           data={currentTrack}
           iconType={MobilityType.car}
@@ -62,20 +50,18 @@ const Map = () => {
             },
           }}
         />
-        <Polyline
-          positions={[
-            [outerBounds[0][0], outerBounds[0][1]],
-            [outerBounds[1][0], outerBounds[1][1]],
-          ]}
-          color={'red'}
-        />
+
+        {/* Path from start to end */}
+        <Polyline positions={places as LatLngExpression[]} color={'red'} />
+
+        {/* Start marker and end marker */}
         <FeatureGroup>
           <Marker
-            data={{ lat: outerBounds[0][0], lng: outerBounds[0][1] }}
+            data={{ lat: places[0][0], lng: places[0][1] }}
             iconType={MapIcons.origin}
           />
           <Marker
-            data={{ lat: outerBounds[1][0], lng: outerBounds[1][1] }}
+            data={{ lat: places[1][0], lng: places[1][1] }}
             iconType={MapIcons.destination}
             eventHandlers={{
               click: () => {

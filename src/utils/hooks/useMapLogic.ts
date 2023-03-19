@@ -5,42 +5,48 @@ import { useEffect, useState } from 'react'
 
 let cursor = 0
 let repetitions = 0
-const useMapLogic = (
-  initialLat: number,
-  initialLng: number,
-  dataPoints: Coordinates[],
-  numberOfRepetitionsMax: number
-) => {
-  const [currentTrack, setCurrentTrack] = useState({
-    lat: initialLat,
-    lng: initialLng,
-  })
+const useMapLogic = (places: number[][], numberOfRepetitionsMax: number) => {
+  const initialState: Coordinates = {
+    lat: places[0][0],
+    lng: places[0][1],
+  }
+  const [currentTrack, setCurrentTrack] = useState(initialState)
 
   useEffect(() => {
-    setCurrentTrack(dataPoints[cursor])
+    const dataStory = [
+      {
+        lat: places[0][0],
+        lng: places[0][1],
+      },
+      {
+        lat: places[1][0],
+        lng: places[1][1],
+      },
+    ]
+    setCurrentTrack(dataStory[cursor])
 
     const interval = setInterval(() => {
-      if (cursor === dataPoints.length - 1) {
+      if (cursor === dataStory.length - 1) {
         if (repetitions < numberOfRepetitionsMax) {
           cursor = 0
           repetitions++
         } else {
           clearInterval(interval)
         }
-        setCurrentTrack(dataPoints[cursor])
+        setCurrentTrack(dataStory[cursor])
         return
       }
 
       cursor += 1
-      setCurrentTrack(dataPoints[cursor])
+      setCurrentTrack(dataStory[cursor])
     }, durationOfTheTrip)
     return () => {
       clearInterval(interval)
     }
-  }, [dataPoints, numberOfRepetitionsMax])
+  }, [numberOfRepetitionsMax, places])
 
   const repeatOneMoreTime = () => {
-    setCurrentTrack(dataPoints[0])
+    setCurrentTrack(initialState)
     cursor = 0
   }
 

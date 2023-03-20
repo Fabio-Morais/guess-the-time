@@ -1,20 +1,25 @@
 import { Box } from '@chakra-ui/react'
 
-import Marker from '@/components/Map/Marker'
-import { MapIcons } from '@/utils/enums/MapIcons'
-import { MobilityType } from '@/utils/enums/MobilityType'
-import useMapLogic from '@/utils/hooks/useMapLogic'
-
 import { LatLngBoundsExpression, LatLngExpression } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { FeatureGroup, MapContainer, Polyline, TileLayer } from 'react-leaflet'
 
+import { MapIcons } from '@/utils/enums/MapIcons'
+import { MobilityType } from '@/utils/enums/MobilityType'
+
+import { Places } from '@/utils/interfaces/Places'
+
+import Marker from '@/components/Map/Marker'
+import OriginDestination from '@/components/OriginDestination'
+
+import useMapLogic from '@/utils/hooks/useMapLogic'
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Map = ({ path, places }: { path: string; places: number[][] }) => {
+const Map = ({ path, places }: { path: string; places: Places }) => {
   const numberOfRepetitions = 1
   //TODO: To be removed
   const [currentTrack, repeatOneMoreTime] = useMapLogic(
-    places,
+    places.coordinates,
     numberOfRepetitions
   )
 
@@ -32,8 +37,8 @@ const Map = ({ path, places }: { path: string; places: number[][] }) => {
       zIndex={1}
     >
       <MapContainer
-        bounds={places as LatLngBoundsExpression}
-        style={{ height: '100%' }}
+        bounds={places.coordinates as LatLngBoundsExpression}
+        style={{ height: '100%', zIndex: 1 }}
       >
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -52,16 +57,25 @@ const Map = ({ path, places }: { path: string; places: number[][] }) => {
         />
 
         {/* Path from start to end */}
-        <Polyline positions={places as LatLngExpression[]} color={'red'} />
+        <Polyline
+          positions={places.coordinates as LatLngExpression[]}
+          color={'red'}
+        />
 
         {/* Start marker and end marker */}
         <FeatureGroup>
           <Marker
-            data={{ lat: places[0][0], lng: places[0][1] }}
+            data={{
+              lat: places.coordinates[0][0],
+              lng: places.coordinates[0][1],
+            }}
             iconType={MapIcons.origin}
           />
           <Marker
-            data={{ lat: places[1][0], lng: places[1][1] }}
+            data={{
+              lat: places.coordinates[1][0],
+              lng: places.coordinates[1][1],
+            }}
             iconType={MapIcons.destination}
             eventHandlers={{
               click: () => {
@@ -71,6 +85,8 @@ const Map = ({ path, places }: { path: string; places: number[][] }) => {
           />
         </FeatureGroup>
       </MapContainer>
+
+      <OriginDestination origin={places.name[0]} destination={places.name[1]} />
     </Box>
   )
 }

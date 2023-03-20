@@ -1,21 +1,28 @@
-import Timer from '@/utils/interfaces/Timer'
-
 import { useState } from 'react'
 
+import { Game } from '@/utils/interfaces/Game'
+
 const useGameLogic = () => {
-  const initialState: Timer = { days: 0, hours: 0, minutes: 0, seconds: 0 }
-  const [timer, setTimer] = useState<Timer>(initialState)
+  const initialState: Game = { score: 0, maxRounds: 1, currentRound: 1 }
+  const [game, setGame] = useState<Game>(initialState)
 
-  const setDay = (day: number) => setTimer({ ...timer, days: day })
-  const setHours = (hours: number) => setTimer({ ...timer, hours: hours })
-  const setMinutes = (minutes: number) =>
-    setTimer({ ...timer, minutes: minutes })
-
-  const printTimer = () => {
-    /*TODO: add logic to print the timer*/
+  const increaseScore = (score: number) => {
+    setGame({ ...game, score: game.score + score })
   }
 
-  return [timer, setDay, setHours, setMinutes, printTimer] as const
+  const nextRound = () => {
+    setGame({ ...game, currentRound: game.currentRound + 1 })
+  }
+
+  const resetGame = () => {
+    setGame(initialState)
+  }
+
+  const setMaxRounds = (maxRounds: number) => {
+    setGame({ ...game, maxRounds: maxRounds })
+  }
+
+  return { game, increaseScore, nextRound, resetGame, setMaxRounds } as const
 }
 
 export default useGameLogic

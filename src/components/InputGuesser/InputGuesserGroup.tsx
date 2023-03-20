@@ -2,10 +2,10 @@ import { Button, Flex } from '@chakra-ui/react'
 
 import InputGuesser from '@/components/InputGuesser/InputGuesser'
 import TimeShower from '@/components/TimeShower'
-import useGameLogic from '@/utils/hooks/useGameLogic'
+import useInputLogic from '@/utils/hooks/useInputLogic'
 
 const InputGuesserGroup = () => {
-  const [timer, setDay, setHours, setMinutes, printTimer] = useGameLogic()
+  const [timer, setDay, setHours, setMinutes, printTimer] = useInputLogic()
 
   return (
     <>

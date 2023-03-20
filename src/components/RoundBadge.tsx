@@ -1,32 +1,35 @@
-import { useState } from 'react'
+import { Box, HStack, Text } from '@chakra-ui/react'
 
-import { Box, Text } from '@chakra-ui/react'
+import { Game } from '@/utils/interfaces/Game'
 
-interface Props {
-  maxRounds: number
-}
-const RoundBadge = ({ maxRounds = 1 }: Props) => {
-  const [round] = useState(1)
+const RoundBadge = ({ gameData }: { gameData: Game }) => {
   return (
     <>
       <Box
         position="fixed"
-        backgroundColor="red"
         right={0}
         top="5rem"
         zIndex={2}
         border="1px"
         borderColor="red"
         boxShadow="2xl"
-        roundedLeft="lg"
-        borderLeftRadius="40%"
+        borderRadius="999em 40px 40px 999em"
         p={2}
-        pl={5}
+        pl={8}
       >
-        <Text>Round</Text>
-        <Text>
-          {round}/{maxRounds}
-        </Text>
+        <HStack spacing={5}>
+          <Box>
+            <Text>Score</Text>
+            <Text>{gameData.score}</Text>
+          </Box>
+
+          <Box>
+            <Text>Round</Text>
+            <Text>
+              {gameData.currentRound}/{gameData.maxRounds}
+            </Text>
+          </Box>
+        </HStack>
       </Box>
     </>
   )

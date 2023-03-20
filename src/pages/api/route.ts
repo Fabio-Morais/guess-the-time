@@ -3,10 +3,11 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { routeData } from '../../../fakeData/routeData'
 
+import { Places } from '@/utils/interfaces/Places'
 import { Routes } from '@/utils/interfaces/Routes'
 
 export interface ResponseType {
-  placesData: number[][] // [lat, lng]
+  placesData: Places
   routesData: Routes
 }
 
@@ -15,12 +16,15 @@ export async function getRoute(): Promise<Routes> {
   return routeData
 }
 
-export async function getRandomPlaces(): Promise<number[][]> {
+export async function getRandomPlaces(): Promise<Places> {
   //TODO: call random places API
-  return [
+  const coordinates: number[][] = [
     [39.466667, -0.375],
     [41.07265370061424, -8.401270685940867],
   ]
+  const names: string[] = ['Porto', 'Valencia']
+
+  return { coordinates, name: names }
 }
 
 export default async function handler(
@@ -29,7 +33,7 @@ export default async function handler(
 ) {
   /* TODO: we need to encode the data to send, preventing cheating Or use redis to store temporary data
    * */
-  const places: number[][] = await getRandomPlaces()
+  const places: Places = await getRandomPlaces()
   const routes: Routes = await getRoute()
   res.status(200).json({ placesData: places, routesData: routes })
 }

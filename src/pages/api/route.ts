@@ -6,14 +6,18 @@ import { routeData } from '../../../fakeData/routeData'
 import { Places } from '@/utils/interfaces/Places'
 import { Routes } from '@/utils/interfaces/Routes'
 
+import { addAnswer } from '@/pages/api/game/gameLogic'
+
 export interface ResponseType {
   placesData: Places
   routesData: Routes
 }
 
-export async function getRoute(): Promise<Routes> {
+export async function getRoute(locations: number[][]): Promise<Routes> {
   //TODO: call Google API
-  return routeData
+  const response = routeData
+  addAnswer(locations.toString(), response.routes[0].duration)
+  return response
 }
 
 export async function getRandomPlaces(): Promise<Places> {
@@ -34,6 +38,6 @@ export default async function handler(
   /* TODO: we need to encode the data to send, preventing cheating Or use redis to store temporary data
    * */
   const places: Places = await getRandomPlaces()
-  const routes: Routes = await getRoute()
+  const routes: Routes = await getRoute(places.coordinates)
   res.status(200).json({ placesData: places, routesData: routes })
 }

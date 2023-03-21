@@ -1,12 +1,23 @@
 import { Button, Flex } from '@chakra-ui/react'
 
+import { Places } from '@/utils/interfaces/Places'
+
 import InputGuesser from '@/components/InputGuesser/InputGuesser'
 import TimeShower from '@/components/TimeShower'
+
 import useInputLogic from '@/utils/hooks/useInputLogic'
 
-const InputGuesserGroup = () => {
-  const [timer, setDay, setHours, setMinutes, printTimer] = useInputLogic()
-
+const InputGuesserGroup = ({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  score,
+  places,
+}: {
+  score: number
+  places: Places
+}) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [timer, setDay, setHours, setMinutes, printTimer, verifyAnswer] =
+    useInputLogic(places)
   return (
     <>
       <TimeShower time={timer} />
@@ -28,7 +39,7 @@ const InputGuesserGroup = () => {
         </InputGuesser>
       </Flex>
 
-      <Button colorScheme="teal" size="lg" onClick={printTimer}>
+      <Button colorScheme="teal" size="lg" onClick={verifyAnswer}>
         Button
       </Button>
     </>

@@ -1,8 +1,9 @@
-import Timer from '@/utils/interfaces/Timer'
-
 import { useState } from 'react'
 
-const useInputLogic = () => {
+import { Places } from '@/utils/interfaces/Places'
+import Timer from '@/utils/interfaces/Timer'
+
+const useInputLogic = (places: Places) => {
   const initialState: Timer = { days: 0, hours: 0, minutes: 0, seconds: 0 }
   const [timer, setTimer] = useState<Timer>(initialState)
 
@@ -15,7 +16,26 @@ const useInputLogic = () => {
     /*TODO: add logic to print the timer*/
   }
 
-  return [timer, setDay, setHours, setMinutes, printTimer] as const
+  const verifyAnswer = () => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ answer: timer, places: places }),
+    }
+    fetch('/api/game', requestOptions)
+      .then((response) => response.json())
+      // eslint-disable-next-line no-console
+      .then((data) => console.log(data))
+  }
+
+  return [
+    timer,
+    setDay,
+    setHours,
+    setMinutes,
+    printTimer,
+    verifyAnswer,
+  ] as const
 }
 
 export default useInputLogic

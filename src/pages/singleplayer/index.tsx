@@ -41,7 +41,7 @@ const Index = (props: ResponseType) => {
             places={props.placesData}
           />
 
-          <InputGuesserGroup />
+          <InputGuesserGroup score={game.score} places={props.placesData} />
         </VStack>
       </Container>
     </>
@@ -50,7 +50,7 @@ const Index = (props: ResponseType) => {
 
 export async function getServerSideProps() {
   const places: Places = await getRandomPlaces()
-  const routes: Routes = await getRoute()
+  const routes: Routes = await getRoute(places.coordinates)
   return {
     props: { placesData: places, routesData: routes }, // will be passed to the page component as props
   }

@@ -5,6 +5,9 @@ import NextNProgress from 'nextjs-progressbar'
 
 import { ChakraProvider } from '@chakra-ui/react'
 
+import { Provider } from 'react-redux'
+
+import { store } from '@/redux/store'
 import { theme } from '@/styles/theme'
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -18,7 +21,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ChakraProvider theme={theme}>
-        <Component {...pageProps} />
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
       </ChakraProvider>
     </>
   )

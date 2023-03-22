@@ -1,8 +1,12 @@
+import { RootState } from '@/redux/store'
+
 import { Box, HStack, Text } from '@chakra-ui/react'
 
-import { Game } from '@/utils/interfaces/Game'
+import { useSelector } from 'react-redux'
 
-const RoundBadge = ({ gameData }: { gameData: Game }) => {
+const RoundBadge = () => {
+  const gameData = useSelector((state: RootState) => state.game)
+
   return (
     <>
       <Box

@@ -4,7 +4,7 @@
   "singleQuote": true,
   "tabWidth": 2,
   "useTabs": false,
-  "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]", "next/", "nextjs", "@chakra-ui", "leaflet", "react*", "@/utils/enums", "@/utils/interfaces", "@/components/", "@/"],
+  "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]", "next/", "nextjs", "@/pages/","@/redux/","@chakra-ui", "leaflet", "react*", "@/utils/enums", "@/utils/interfaces", "@/components/", "@/"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
 }

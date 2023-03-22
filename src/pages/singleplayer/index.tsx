@@ -1,23 +1,23 @@
 import dynamic from 'next/dynamic'
 
+import { getRandomPlaces } from '@/pages/api/place'
+import { ResponseType, getRoute } from '@/pages/api/route'
+
+/** Chakra */
 import { Container, Heading, VStack } from '@chakra-ui/react'
 
+/** Utils */
 import { Places } from '@/utils/interfaces/Places'
 import { Routes } from '@/utils/interfaces/Routes'
 
+/** Components */
 import InputGuesserGroup from '@/components/InputGuesser/InputGuesserGroup'
 import RoundBadge from '@/components/RoundBadge'
 import Timer from '@/components/Timer'
 
-import { ResponseType, getRandomPlaces, getRoute } from '@/pages/api/route'
-import useGameLogic from '@/utils/hooks/useGameLogic'
-
 const Map = dynamic(() => import('@/components/Map/Map'), { ssr: false })
 
 const Index = (props: ResponseType) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { game, increaseScore, nextRound, resetGame, setMaxRounds } =
-    useGameLogic()
   return (
     <>
       <Container
@@ -29,7 +29,7 @@ const Index = (props: ResponseType) => {
           Guess the Time
         </Heading>
 
-        <RoundBadge gameData={game} />
+        <RoundBadge />
 
         <VStack spacing={5} width="100%">
           <Timer />
@@ -41,7 +41,7 @@ const Index = (props: ResponseType) => {
             places={props.placesData}
           />
 
-          <InputGuesserGroup score={game.score} places={props.placesData} />
+          <InputGuesserGroup places={props.placesData} />
         </VStack>
       </Container>
     </>

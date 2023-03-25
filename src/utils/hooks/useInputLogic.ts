@@ -1,5 +1,5 @@
-import { increaseScore } from '@/redux/slices/gameSlice'
 import { timeout } from '@/redux/slices/timeSlice'
+import { increaseScore } from '@/redux/slices/userSlice'
 
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -9,7 +9,7 @@ import Timer from '@/utils/interfaces/Timer'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const useInputLogic = (places: Places) => {
-  const initialState: Timer = { days: 0, hours: 0, minutes: 0, seconds: 0 }
+  const initialState: Timer = { days: 0, hours: 2, minutes: 20, seconds: 0 }
   const [timer, setTimer] = useState<Timer>(initialState)
 
   const dispatch = useDispatch()

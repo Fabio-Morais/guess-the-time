@@ -38,7 +38,7 @@ const InputGuesserGroup = ({
       </Flex>
 
       <Button colorScheme="teal" size="lg" onClick={verifyAnswer}>
-        Button
+        Guess
       </Button>
     </>
   )

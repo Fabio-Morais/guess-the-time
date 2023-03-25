@@ -1,8 +1,8 @@
-import L from 'leaflet'
-
 import airplaneIcon from '../../public/favicon.ico'
 import destination from '../../public/map/flag.png'
 import origin from '../../public/map/placeholder.png'
+
+import L from 'leaflet'
 
 import { MapIcons } from '@/utils/enums/MapIcons'
 import { MobilityType } from '@/utils/enums/MobilityType'
@@ -13,7 +13,7 @@ export const getIcon = (type: string) => {
       return iconCar
     case MobilityType.bike:
       return iconBike
-    case MobilityType.human:
+    case MobilityType.walking:
       return iconHuman
     case MapIcons.origin:
       return iconOrigin

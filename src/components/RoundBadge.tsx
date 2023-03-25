@@ -5,7 +5,7 @@ import { Box, HStack, Text } from '@chakra-ui/react'
 import { useSelector } from 'react-redux'
 
 const RoundBadge = () => {
-  const gameData = useSelector((state: RootState) => state.game)
+  const userData = useSelector((state: RootState) => state.user)
 
   return (
     <>
@@ -24,13 +24,13 @@ const RoundBadge = () => {
         <HStack spacing={5}>
           <Box>
             <Text>Score</Text>
-            <Text>{gameData.score}</Text>
+            <Text>{userData.score}</Text>
           </Box>
 
           <Box>
             <Text>Round</Text>
             <Text>
-              {gameData.currentRound}/{gameData.maxRounds}
+              {userData.currentRound}/{userData.maxRounds}
             </Text>
           </Box>
         </HStack>

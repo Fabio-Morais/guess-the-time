@@ -1,38 +1,41 @@
 import { Draft, PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-import { initialRound, initialScore, maxRounds } from '@/utils/defaultValues'
+import { MobilityType } from '@/utils/enums/MobilityType'
+
+import { Place } from '@/utils/interfaces/Places'
 
 export interface GameState {
-  score: number
-  correctAnswer: string
-  currentRound: number
-  maxRounds: number
+  origin: Place
+  destination: Place
+  travelMode: MobilityType
 }
 
 const initialState: GameState = {
-  score: initialScore,
-  correctAnswer: '',
-  currentRound: initialRound,
-  maxRounds: maxRounds,
+  origin: {
+    coordinates: [],
+    name: '',
+  },
+  destination: {
+    coordinates: [],
+    name: '',
+  },
+  travelMode: MobilityType.car,
 }
 
 export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    increaseScore: (state: Draft<GameState>, action: PayloadAction<number>) => {
-      state.score += action.payload
-    },
-    resetScore: (state: Draft<GameState>) => {
-      state.score = 0
+    setTravelMode: (state: Draft<GameState>, action: PayloadAction<MobilityType>) => {
+      state.travelMode = action.payload
     },
   },
 })
 
 // Selectors
-export const getScore = (state: { game: GameState }) => state.game.maxRounds
+export const getTravelMode = (state: { game: GameState }) => state.game.travelMode
 
 // Reducers and actions
-export const { increaseScore, resetScore } = gameSlice.actions
+export const { setTravelMode } = gameSlice.actions
 
 export default gameSlice.reducer

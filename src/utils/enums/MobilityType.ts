@@ -1,6 +1,5 @@
-export enum MobilityType{
-    car = 'car',
-    bike = 'bike',
-    human = 'human',
-
+export enum MobilityType {
+  car = 'car',
+  bike = 'bike',
+  walking = 'walking',
 }

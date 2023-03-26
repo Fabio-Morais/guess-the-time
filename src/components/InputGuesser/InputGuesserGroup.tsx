@@ -9,10 +9,8 @@ import useInputLogic from '@/utils/hooks/useInputLogic'
 
 const InputGuesserGroup = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  score,
   places,
 }: {
-  score: number
   places: Places
 }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -40,7 +38,7 @@ const InputGuesserGroup = ({
       </Flex>
 
       <Button colorScheme="teal" size="lg" onClick={verifyAnswer}>
-        Button
+        Guess
       </Button>
     </>
   )

@@ -1,3 +1,5 @@
+import { MobilityType } from '@/utils/enums/MobilityType'
+
 import Timer from '@/utils/interfaces/Timer'
 
 export const convertSecondsToTimeObject = (s: number): Timer => {
@@ -18,4 +20,17 @@ export const convertSecondsToTimeObject = (s: number): Timer => {
   hours = hours % 24
 
   return { days: d, hours: hours, minutes: minutes, seconds: seconds }
+}
+
+export const prizeIndexToMobileType = (index: number) => {
+  switch (index) {
+    case 0:
+      return MobilityType.car
+    case 1:
+      return MobilityType.bike
+    case 2:
+      return MobilityType.walking
+    default:
+      return MobilityType.car
+  }
 }

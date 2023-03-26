@@ -40,5 +40,6 @@ export function getScore(id: string): number | undefined {
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function validateAnswer(answer: Answer) {
+  // get the answer from coordinates
   return 'test'
 }

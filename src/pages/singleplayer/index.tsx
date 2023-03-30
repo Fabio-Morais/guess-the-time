@@ -10,6 +10,8 @@ import { Container, Heading, VStack } from '@chakra-ui/react'
 import { Places } from '@/utils/interfaces/Places'
 import { Routes } from '@/utils/interfaces/Routes'
 
+import AnswerModal from '@/components/AnswerModal'
+
 /** Components */
 import InputGuesserGroup from '@/components/InputGuesser/InputGuesserGroup'
 import RouletteModal from '@/components/RouletteModal/RouletteModal'
@@ -30,12 +32,12 @@ const Index = (props: ResponseType) => {
 
         <VStack spacing={5} width="100%">
           <Timer />
-
           <Map path={decodeURI(props.routesData.routes[0].polyline.encodedPolyline)} places={props.placesData} />
           <RouletteModal />
           <InputGuesserGroup places={props.placesData} />
         </VStack>
       </Container>
+      <AnswerModal />
     </>
   )
 }

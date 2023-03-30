@@ -26,6 +26,9 @@ export const userSlice = createSlice({
     resetScore: (state: Draft<UserState>) => {
       state.score = 0
     },
+    setNextRound: (state: Draft<UserState>) => {
+      state.currentRound < state.maxRounds && state.currentRound++
+    },
   },
 })
 
@@ -33,6 +36,6 @@ export const userSlice = createSlice({
 export const getScore = (state: { user: UserState }) => state.user.maxRounds
 
 // Reducers and actions
-export const { increaseScore, resetScore } = userSlice.actions
+export const { increaseScore, resetScore, setNextRound } = userSlice.actions
 
 export default userSlice.reducer

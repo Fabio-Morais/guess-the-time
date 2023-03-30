@@ -31,13 +31,18 @@ export const timeSlice = createSlice({
       state.timeout = true
       state.timePlaying = false
     },
+    resetTimer: (state: Draft<TimerState>) => {
+      state.timeout = false
+      state.timePlaying = false
+      state.currentTimer = maxTime
+    },
   },
 })
 // Selectors
-export const isPlaying = (state: { timer: TimerState }) =>
-  state.timer.timePlaying
+export const isPlaying = (state: { timer: TimerState }) => state.timer.timePlaying
+export const currentTime = (state: { timer: TimerState }) => state.timer.currentTimer
 
 // Reducers and actions
-export const { setTimer, pauseTimer, playTimer, timeout } = timeSlice.actions
+export const { setTimer, pauseTimer, playTimer, timeout, resetTimer } = timeSlice.actions
 
 export default timeSlice.reducer

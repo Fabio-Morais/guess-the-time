@@ -14,8 +14,8 @@ const InputGuesserGroup = ({
   places: Places
 }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [timer, setDay, setHours, setMinutes, printTimer, verifyAnswer] =
-    useInputLogic(places)
+  const [timer, setDay, setHours, setMinutes, printTimer, verifyAnswer] = useInputLogic(places)
+
   return (
     <>
       <TimeShower time={timer} />

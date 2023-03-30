@@ -1,28 +1,19 @@
-import { useState } from 'react'
+import { getShowAnswer, setShowAnswer } from '@/redux/slices/gameSlice'
+import { resetTimer } from '@/redux/slices/timeSlice'
+import { setNextRound } from '@/redux/slices/userSlice'
 
-import { Game } from '@/utils/interfaces/Game'
+import { useDispatch, useSelector } from 'react-redux'
 
 const useGameLogic = () => {
-  const initialState: Game = { score: 0, maxRounds: 1, currentRound: 1 }
-  const [game, setGame] = useState<Game>(initialState)
-
-  const increaseScore = (score: number) => {
-    setGame({ ...game, score: game.score + score })
-  }
+  const dispatch = useDispatch()
+  const open = useSelector(getShowAnswer)
 
   const nextRound = () => {
-    setGame({ ...game, currentRound: game.currentRound + 1 })
+    dispatch(setShowAnswer(false))
+    dispatch(setNextRound())
+    dispatch(resetTimer())
   }
-
-  const resetGame = () => {
-    setGame(initialState)
-  }
-
-  const setMaxRounds = (maxRounds: number) => {
-    setGame({ ...game, maxRounds: maxRounds })
-  }
-
-  return { game, increaseScore, nextRound, resetGame, setMaxRounds } as const
+  return { open, nextRound } as const
 }
 
 export default useGameLogic

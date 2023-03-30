@@ -16,7 +16,7 @@ const RouletteModal = () => {
 
   return (
     <>
-      <Modal isCentered isOpen={isOpen} onClose={onClose} size={'4xl'} motionPreset="scale" trapFocus={false}>
+      <Modal isCentered isOpen={false} onClose={onClose} size={'4xl'} motionPreset="scale" trapFocus={false}>
         <OverlayOne />
         <ModalContent>
           <ModalHeader textAlign={'center'}>

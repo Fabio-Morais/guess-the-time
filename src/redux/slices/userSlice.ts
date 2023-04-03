@@ -1,19 +1,13 @@
 import { Draft, PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-import { initialRound, initialScore, maxRounds } from '@/utils/defaultValues'
+import { initialScore } from '@/utils/defaultValues'
 
 export interface UserState {
   score: number
-  correctAnswer: string
-  currentRound: number
-  maxRounds: number
 }
 
 const initialState: UserState = {
   score: initialScore,
-  correctAnswer: '',
-  currentRound: initialRound,
-  maxRounds: maxRounds,
 }
 
 export const userSlice = createSlice({
@@ -26,16 +20,13 @@ export const userSlice = createSlice({
     resetScore: (state: Draft<UserState>) => {
       state.score = 0
     },
-    setNextRound: (state: Draft<UserState>) => {
-      state.currentRound < state.maxRounds && state.currentRound++
-    },
   },
 })
 
 // Selectors
-export const getScore = (state: { user: UserState }) => state.user.maxRounds
+export const getScore = (state: { user: UserState }) => state.user.score
 
 // Reducers and actions
-export const { increaseScore, resetScore, setNextRound } = userSlice.actions
+export const { increaseScore, resetScore } = userSlice.actions
 
 export default userSlice.reducer

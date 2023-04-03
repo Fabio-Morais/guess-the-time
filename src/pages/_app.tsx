@@ -7,12 +7,17 @@ import { store } from '@/redux/store'
 
 import { ChakraProvider } from '@chakra-ui/react'
 
+import { useState } from 'react'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
 import { Provider } from 'react-redux'
 
 import '@/styles/globals.css'
 import { theme } from '@/styles/theme'
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [queryClient] = useState(() => new QueryClient())
+
   return (
     <>
       <Head>
@@ -25,7 +30,10 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <ChakraProvider theme={theme}>
         <Provider store={store}>
-          <Component {...pageProps} />
+          <QueryClientProvider client={queryClient}>
+            <Component {...pageProps} />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
         </Provider>
       </ChakraProvider>
     </>

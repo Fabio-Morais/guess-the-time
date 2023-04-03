@@ -1,3 +1,4 @@
+import { getMaxRounds, getRoundNumber } from '@/redux/slices/gameSlice'
 import { RootState } from '@/redux/store'
 
 import { Box, HStack, Text } from '@chakra-ui/react'
@@ -6,7 +7,8 @@ import { useSelector } from 'react-redux'
 
 const RoundBadge = () => {
   const userData = useSelector((state: RootState) => state.user)
-
+  const currentRound = useSelector(getRoundNumber)
+  const maxRounds = useSelector(getMaxRounds)
   return (
     <>
       <Box
@@ -30,7 +32,7 @@ const RoundBadge = () => {
           <Box>
             <Text>Round</Text>
             <Text>
-              {userData.currentRound}/{userData.maxRounds}
+              {currentRound}/{maxRounds}
             </Text>
           </Box>
         </HStack>

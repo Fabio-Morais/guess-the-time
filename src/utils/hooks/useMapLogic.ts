@@ -1,7 +1,8 @@
-import { durationOfTheTrip } from '@/utils/defaultValues'
+import { useEffect, useState } from 'react'
+
 import Coordinates from '@/utils/interfaces/Coordinates'
 
-import { useEffect, useState } from 'react'
+import { durationOfTheTrip } from '@/utils/defaultValues'
 
 let cursor = 0
 let repetitions = 0

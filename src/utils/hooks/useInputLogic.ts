@@ -2,14 +2,14 @@ import { setShowAnswer } from '@/redux/slices/gameSlice'
 import { currentTime, timeout } from '@/redux/slices/timeSlice'
 import { increaseScore } from '@/redux/slices/userSlice'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Places } from '@/utils/interfaces/Places'
 import Timer from '@/utils/interfaces/Timer'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const useInputLogic = (places: Places) => {
+import { maxTime } from '@/utils/defaultValues'
+
+const useInputLogic = () => {
   const initialState: Timer = { days: 0, hours: 2, minutes: 20, seconds: 0 }
   const [timer, setTimer] = useState<Timer>(initialState)
   const dispatch = useDispatch()
@@ -23,10 +23,15 @@ const useInputLogic = (places: Places) => {
     /*TODO: add logic to print the timer*/
   }
 
-  const verifyAnswer = () => {
-    dispatch(increaseScore(answerTime))
-    dispatch(timeout())
+  useEffect(() => {
+    if (answerTime === maxTime) return
+
     dispatch(setShowAnswer(true))
+    dispatch(increaseScore(answerTime))
+  }, [answerTime, dispatch])
+
+  const verifyAnswer = () => {
+    dispatch(timeout())
   }
 
   return [timer, setDay, setHours, setMinutes, printTimer, verifyAnswer] as const

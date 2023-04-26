@@ -13,7 +13,6 @@ import AnswerModal from '@/components/AnswerModal'
 import InputGuesserGroup from '@/components/InputGuesser/InputGuesserGroup'
 import RouletteModal from '@/components/RouletteModal/RouletteModal'
 import RoundBadge from '@/components/RoundBadge'
-import Timer from '@/components/Timer'
 
 const Map = dynamic(() => import('@/components/Map/Map'), { ssr: false })
 
@@ -30,7 +29,9 @@ const Index = () => {
         <RoundBadge />
 
         <VStack spacing={5} width="100%">
-          <Timer />
+          {
+            //TODO: UNCOMMENT THIS <Timer />
+          }
           <Map
             places={{
               coordinates: [origin.coordinates, destination.coordinates],

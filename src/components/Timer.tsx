@@ -22,6 +22,8 @@ const Timer = () => {
   }, [dispatch, timerIsPlaying])
   const renderTime = ({ remainingTime }: Props) => {
     currentTimer = remainingTime
+    dispatch(setTimer(currentTimer))
+
     return <Text>{remainingTime}</Text>
   }
 

@@ -2,6 +2,7 @@ import {
   getIsNewRound,
   getRoundNumber,
   getShowAnswer,
+  setCorrectAnswer,
   setDestination,
   setNewRound,
   setOrigin,
@@ -11,10 +12,12 @@ import { setNextRound } from '@/redux/slices/gameSlice'
 import { resetTimer } from '@/redux/slices/timeSlice'
 
 import { useEffect } from 'react'
-import { useQuery } from 'react-query'
+import { useMutation, useQuery } from 'react-query'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { getPlace } from '@/api/places'
+import { PlacesRequest } from '@/utils/interfaces/Places'
+
+import { getPlace, postTodoFn } from '@/api/places'
 
 const useGameLogic = () => {
   const dispatch = useDispatch()
@@ -26,8 +29,17 @@ const useGameLogic = () => {
   const { data, isSuccess } = useQuery({
     enabled: true,
     staleTime: Infinity,
-    queryKey: ['roundNumber:', roundNumber],
+    queryKey: ['PlaceRN:', roundNumber],
     queryFn: () => getPlace(),
+  })
+
+  const { mutate } = useMutation((data: PlacesRequest) => postTodoFn(data), {
+    onSuccess: (data) => {
+      dispatch(setCorrectAnswer(data.duration))
+    },
+    onError: () => {
+      // Error actions
+    },
   })
 
   useEffect(() => {
@@ -46,8 +58,9 @@ const useGameLogic = () => {
       const destination = { coordinates: data?.placesData.coordinates[1], name: data?.placesData.name[1] }
       dispatch(setOrigin(origin))
       dispatch(setDestination(destination))
+      mutate({ origin, destination })
     }
-  }, [isSuccess])
+  }, [data?.placesData.coordinates, data?.placesData.name, dispatch, isSuccess, mutate])
 
   const nextRound = () => {
     dispatch(setNewRound(true))

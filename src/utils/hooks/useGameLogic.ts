@@ -2,6 +2,7 @@ import {
   getIsNewRound,
   getRoundNumber,
   getShowAnswer,
+  resetRounds,
   setCorrectAnswer,
   setDestination,
   setNewRound,
@@ -10,6 +11,7 @@ import {
 } from '@/redux/slices/gameSlice'
 import { setNextRound } from '@/redux/slices/gameSlice'
 import { resetTimer } from '@/redux/slices/timeSlice'
+import { resetScore } from '@/redux/slices/userSlice'
 
 import { useEffect } from 'react'
 import { useMutation, useQuery } from 'react-query'
@@ -35,7 +37,7 @@ const useGameLogic = () => {
 
   const { mutate } = useMutation((data: PlacesRequest) => postTodoFn(data), {
     onSuccess: (data) => {
-      dispatch(setCorrectAnswer(data.duration))
+      dispatch(setCorrectAnswer(data.routes[0].duration))
     },
     onError: () => {
       // Error actions
@@ -69,7 +71,13 @@ const useGameLogic = () => {
     dispatch(resetTimer())
   }
 
-  return { open, nextRound } as const
+  const newGame = () => {
+    dispatch(resetRounds())
+    dispatch(resetScore())
+    dispatch(setShowAnswer(false))
+  }
+
+  return { open, nextRound, newGame } as const
 }
 
 export default useGameLogic

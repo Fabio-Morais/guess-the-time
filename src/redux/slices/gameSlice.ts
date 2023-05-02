@@ -59,6 +59,9 @@ export const gameSlice = createSlice({
     setCorrectAnswer: (state: Draft<GameState>, action: PayloadAction<string>) => {
       state.correctAnswer = action.payload
     },
+    resetRounds: (state: Draft<GameState>) => {
+      state.currentRound = 1
+    },
   },
 })
 
@@ -70,9 +73,18 @@ export const getRoundNumber = (state: { game: GameState }) => state.game.current
 export const getMaxRounds = (state: { game: GameState }) => state.game.maxRounds
 export const getOrigin = (state: { game: GameState }) => state.game.origin
 export const getDestination = (state: { game: GameState }) => state.game.destination
+export const getCorrectAnswer = (state: { game: GameState }) => state.game.correctAnswer
 
 // Reducers and actions
-export const { setTravelMode, setShowAnswer, setNewRound, setNextRound, setOrigin, setDestination, setCorrectAnswer } =
-  gameSlice.actions
+export const {
+  setTravelMode,
+  setShowAnswer,
+  setNewRound,
+  setNextRound,
+  setOrigin,
+  setDestination,
+  setCorrectAnswer,
+  resetRounds,
+} = gameSlice.actions
 
 export default gameSlice.reducer

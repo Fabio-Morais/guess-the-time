@@ -7,7 +7,7 @@ import useInputLogic from '@/utils/hooks/useInputLogic'
 
 const InputGuesserGroup = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [timer, setDay, setHours, setMinutes, printTimer, verifyAnswer] = useInputLogic()
+  const [timer, setDay, setHours, setMinutes, printTimer, guess] = useInputLogic()
 
   return (
     <>
@@ -30,7 +30,7 @@ const InputGuesserGroup = () => {
         </InputGuesser>
       </Flex>
 
-      <Button colorScheme="teal" size="lg" onClick={verifyAnswer}>
+      <Button colorScheme="teal" size="lg" onClick={guess}>
         Guess
       </Button>
     </>

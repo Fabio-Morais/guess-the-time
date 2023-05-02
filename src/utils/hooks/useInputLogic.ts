@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import Timer from '@/utils/interfaces/Timer'
 
-import { convertSecondsToTimeObject } from '@/utils/convertions'
+import { calculateScore, convertSecondsToTimeObject } from '@/utils/convertions'
 
 const useInputLogic = () => {
   const initialState: Timer = { days: 0, hours: 2, minutes: 20, seconds: 0 }
@@ -24,9 +24,8 @@ const useInputLogic = () => {
   }
 
   const verifyAnswer = () => {
-    const { days, hours, minutes } = convertSecondsToTimeObject(+correctAnswer.slice(0, -1))
-    if (days == timer.days && hours == timer.hours && minutes == timer.minutes) return 10
-    else return 0
+    const correctTimer: Timer = convertSecondsToTimeObject(+correctAnswer.slice(0, -1))
+    return calculateScore(correctTimer, timer)
   }
 
   const guess = () => {

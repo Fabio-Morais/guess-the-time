@@ -14,7 +14,7 @@ import InputGuesserGroup from '@/components/InputGuesser/InputGuesserGroup'
 import RouletteModal from '@/components/RouletteModal/RouletteModal'
 import RoundBadge from '@/components/RoundBadge'
 
-const Map = dynamic(() => import('@/components/Map/Map'), { ssr: false })
+const Map = dynamic(() => import('@/components/Map/GameMap'), { ssr: false })
 
 const Index = () => {
   const origin = useSelector(getOrigin)

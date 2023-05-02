@@ -1,8 +1,10 @@
 import { Box } from '@chakra-ui/react'
 
-import { LatLngBoundsExpression, LatLngExpression } from 'leaflet'
+import { LatLngBounds, LatLngExpression, LatLngTuple, Map } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { FeatureGroup, MapContainer, Polyline, TileLayer } from 'react-leaflet'
+
+import { useEffect, useRef, useState } from 'react'
 
 import { MapIcons } from '@/utils/enums/MapIcons'
 import { MobilityType } from '@/utils/enums/MobilityType'
@@ -14,12 +16,26 @@ import OriginDestination from '@/components/OriginDestination'
 
 import useMapLogic from '@/utils/hooks/useMapLogic'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Map = ({ places }: { places: Places }) => {
+const GameMap = ({ places }: { places: Places }) => {
   const numberOfRepetitions = 1
-  //TODO: To be removed
   const [currentTrack, repeatOneMoreTime] = useMapLogic(places.coordinates, numberOfRepetitions)
-  // @ts-ignore
+  const mapRef = useRef<Map>(null)
+  const [mapBounds, setMapBounds] = useState<LatLngBounds | null>(null)
+
+  useEffect(() => {
+    if (mapBounds && mapRef.current) {
+      mapRef.current.fitBounds(mapBounds)
+    }
+  }, [mapBounds])
+
+  useEffect(() => {
+    if (places.coordinates[0].length > 0) {
+      const coordinates: LatLngTuple[] = places.coordinates.map((coord) => [coord[0], coord[1]] as LatLngTuple)
+      const bounds = new LatLngBounds(coordinates)
+      setMapBounds(bounds)
+    }
+  }, [places.coordinates])
+
   return (
     <Box
       margin={'auto'}
@@ -33,7 +49,7 @@ const Map = ({ places }: { places: Places }) => {
       zIndex={1}
     >
       {places.coordinates[0].length > 0 && (
-        <MapContainer bounds={places.coordinates as LatLngBoundsExpression} style={{ height: '100%', zIndex: 1 }}>
+        <MapContainer ref={mapRef} style={{ height: '100%', zIndex: 1 }}>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -82,4 +98,4 @@ const Map = ({ places }: { places: Places }) => {
   )
 }
 
-export default Map
+export default GameMap

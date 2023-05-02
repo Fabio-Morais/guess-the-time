@@ -35,6 +35,10 @@ export const prizeIndexToMobileType = (index: number) => {
   }
 }
 
+/*
+ * @param expectedTime: Timer
+ * @param actualTime: Timer
+ * */
 export function calculateScore(expectedTime: Timer, actualTime: Timer): number {
   const expectedDuration = expectedTime.days * 24 * 60 + expectedTime.hours * 60 + expectedTime.minutes
   const actualDuration = actualTime.days * 24 * 60 + actualTime.hours * 60 + actualTime.minutes

@@ -1,6 +1,6 @@
 import { getCorrectAnswer, setShowAnswer } from '@/redux/slices/gameSlice'
 import { timeout } from '@/redux/slices/timeSlice'
-import { increaseScore } from '@/redux/slices/userSlice'
+import { increaseScore, setCurrentRoundScore } from '@/redux/slices/userSlice'
 
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -32,6 +32,7 @@ const useInputLogic = () => {
     dispatch(timeout())
     dispatch(setShowAnswer(true))
     const scoreToIncrease = verifyAnswer()
+    dispatch(setCurrentRoundScore(scoreToIncrease))
     dispatch(increaseScore(scoreToIncrease))
   }
 

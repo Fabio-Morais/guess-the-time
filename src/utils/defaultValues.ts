@@ -5,6 +5,7 @@ export const maxRounds = 5
 export const maxTime = 20
 export const initialScore = 0
 export const initialRound = 1
+export const maxScore = 100
 
 export const prizes: Prizes[] = [
   {
